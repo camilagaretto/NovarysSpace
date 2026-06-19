@@ -83,9 +83,27 @@ def satellites() -> list[SatelliteResponse]:
             name=record["name"],
             orbit_regime=record["orbit_regime"],
             fetched_at=record["fetched_at"],
+            raw_json=record["raw_json"],
         )
         for record in records
     ]
+
+
+@app.get("/api/candidates", response_model=list[SatelliteResponse])
+def candidates() -> list[SatelliteResponse]:
+    records = get_orbital_records(role="candidate")
+    return [
+        SatelliteResponse(
+            norad_id=record["norad_id"],
+            role=record["role"],
+            name=record["name"],
+            orbit_regime=record["orbit_regime"],
+            fetched_at=record["fetched_at"],
+            raw_json=record["raw_json"],
+        )
+        for record in records
+    ]
+
 
 
 @app.get("/api/events", response_model=list[ProximityEventResponse])

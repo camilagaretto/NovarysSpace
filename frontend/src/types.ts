@@ -6,6 +6,7 @@ export interface Satellite {
   name: string;
   orbit_regime: "LEO" | "GEO";
   fetched_at: string;
+  raw_json?: any;
 }
 
 export interface ProximityEvent {

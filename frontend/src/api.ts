@@ -21,6 +21,11 @@ export function getSatellites(): Promise<Satellite[]> {
   return request<Satellite[]>("/api/satellites");
 }
 
+export function getCandidates(): Promise<Satellite[]> {
+  return request<Satellite[]>("/api/candidates");
+}
+
+
 export function getEvents(query = ""): Promise<ProximityEvent[]> {
   return request<ProximityEvent[]>(`/api/events${query}`);
 }

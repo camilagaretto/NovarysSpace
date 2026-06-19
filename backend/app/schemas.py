@@ -21,12 +21,16 @@ class ScanResponse(BaseModel):
     computed_at: str
 
 
+from typing import Any
+
 class SatelliteResponse(BaseModel):
     norad_id: int
     role: str
     name: str
     orbit_regime: str
     fetched_at: str
+    raw_json: dict[str, Any]
+
 
 
 class ProximityEventResponse(BaseModel):
