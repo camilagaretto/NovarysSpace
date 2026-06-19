@@ -1,7 +1,10 @@
 import type { IngestResult, ProximityEvent, Report, Satellite, ScanResult } from "./types";
 
 const API_URL =
-  import.meta.env.VITE_API_URL ?? `${window.location.protocol}//${window.location.hostname}:8000`;
+  import.meta.env.VITE_API_URL ??
+  (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:8000"
+    : "");
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`${API_URL}${path}`, {
@@ -20,6 +23,11 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 export function getSatellites(): Promise<Satellite[]> {
   return request<Satellite[]>("/api/satellites");
 }
+
+export function getCandidates(): Promise<Satellite[]> {
+  return request<Satellite[]>("/api/candidates");
+}
+
 
 export function getEvents(query = ""): Promise<ProximityEvent[]> {
   return request<ProximityEvent[]>(`/api/events${query}`);
